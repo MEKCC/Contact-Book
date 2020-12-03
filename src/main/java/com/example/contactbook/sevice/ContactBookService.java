@@ -4,9 +4,7 @@ import com.example.contactbook.domain.ContactBook;
 import com.example.contactbook.repos.ContactBookRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.Map;
+import org.springframework.ui.Model;
 
 @Service
 public class ContactBookService {
@@ -14,18 +12,20 @@ public class ContactBookService {
     @Autowired
     ContactBookRepo contactRepo;
 
-    public List<ContactBook> mainPageWithContacts() {
-        return contactRepo.findAll();
+    public Model mainPageWithContacts(Model model) {
+
+        model.addAttribute("contacts", contactRepo.findAll());
+        return model;
     }
 
-    public Map<String, Object> createContact(String fullName, String firstName, String lastName,
-                                             String phoneNumber, String cellPhoneNumber, String address,
-                                             Map<String, Object> model) {
+    public Model createContact(String fullName, String firstName, String lastName,
+                               String phoneNumber, String cellPhoneNumber, String address,
+                               Model model) {
 
         String message;
         if (contactRepo.findByFullName(fullName) != null) {
             message = "user is already exist, please choose another name";
-            model.put("message", message);
+            model.addAttribute("message", message);
             return model;
         }
 
@@ -41,14 +41,33 @@ public class ContactBookService {
         contactRepo.save(contact);
 
         Iterable<ContactBook> contactFromDB = contactRepo.findAll();
-        model.put("contacts", contactFromDB);
+        model.addAttribute("contacts", contactFromDB);
 
         return model;
     }
 
-    public Map<String, Object> findContact(String fullName, Map<String, Object> model) {
+    public Model findContact(String fullName, Model model) {
         ContactBook contactByFullName = contactRepo.findByFullName(fullName);
-        model.put("contacts", contactByFullName);
+        model.addAttribute("contacts", contactByFullName);
+        return model;
+    }
+
+    public Model updateContact(String fullName, Model model) {
+        ContactBook updateContact = contactRepo.findByFullName(fullName);
+        model.addAttribute("updateContact", updateContact);
+        return model;
+    }
+
+    public Model updateFilm(ContactBook contact, Model model) {
+        model.addAttribute("updateContact", contact);
+        String message;
+        if (contactRepo.findByFullName(contact.getFullName()) != null) {
+            message = "this name is already exist, please choose another name!!!";
+            model.addAttribute("message", message);
+            return model;
+        }
+
+        contactRepo.save(contact);
         return model;
     }
 }
