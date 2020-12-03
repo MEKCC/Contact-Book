@@ -4,11 +4,13 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 @Data
 @Builder(toBuilder = true)
 @AllArgsConstructor
-public class ContactBook {
+@Document(collection = "contact")
+public class Contact {
 
     @Id
     private String id;

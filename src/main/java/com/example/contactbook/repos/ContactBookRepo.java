@@ -1,12 +1,13 @@
 package com.example.contactbook.repos;
 
-import com.example.contactbook.domain.ContactBook;
+import com.example.contactbook.domain.Contact;
 import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.stereotype.Repository;
 
-public interface ContactBookRepo extends MongoRepository<ContactBook, String> {
+@Repository
+public interface ContactBookRepo extends MongoRepository<Contact, String> {
 
-    ContactBook findByFullName(String fullName);
+    Contact findByFullName(String fullName);
     void deleteByFullName(String fullName);
-
     void deleteById(String id);
 }

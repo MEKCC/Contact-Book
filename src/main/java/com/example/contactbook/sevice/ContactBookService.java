@@ -1,6 +1,6 @@
 package com.example.contactbook.sevice;
 
-import com.example.contactbook.domain.ContactBook;
+import com.example.contactbook.domain.Contact;
 import com.example.contactbook.repos.ContactBookRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,7 +29,7 @@ public class ContactBookService {
             return model;
         }
 
-        ContactBook contact = ContactBook.builder()
+        Contact contact = Contact.builder()
                 .fullName(fullName)
                 .firstName(firstName)
                 .lastName(lastName)
@@ -40,25 +40,25 @@ public class ContactBookService {
 
         contactRepo.save(contact);
 
-        Iterable<ContactBook> contactFromDB = contactRepo.findAll();
+        Iterable<Contact> contactFromDB = contactRepo.findAll();
         model.addAttribute("contacts", contactFromDB);
 
         return model;
     }
 
-    public Model findContact(String fullName, Model model) {
-        ContactBook contactByFullName = contactRepo.findByFullName(fullName);
+    public Model findContactByFullName(String fullName, Model model) {
+        Contact contactByFullName = contactRepo.findByFullName(fullName);
         model.addAttribute("contacts", contactByFullName);
         return model;
     }
 
     public Model updateContact(String fullName, Model model) {
-        ContactBook updateContact = contactRepo.findByFullName(fullName);
+        Contact updateContact = contactRepo.findByFullName(fullName);
         model.addAttribute("updateContact", updateContact);
         return model;
     }
 
-    public Model updateFilm(ContactBook contact, Model model) {
+    public Model updateFilm(Contact contact, Model model) {
         model.addAttribute("updateContact", contact);
         String message;
         if (contactRepo.findByFullName(contact.getFullName()) != null) {
@@ -69,5 +69,9 @@ public class ContactBookService {
 
         contactRepo.save(contact);
         return model;
+    }
+
+    public void deleteContactByFullName(String fullName) {
+        contactRepo.deleteByFullName(fullName);
     }
 }

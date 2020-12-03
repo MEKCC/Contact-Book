@@ -1,7 +1,6 @@
 package com.example.contactbook.controller;
 
-import com.example.contactbook.domain.ContactBook;
-import com.example.contactbook.repos.ContactBookRepo;
+import com.example.contactbook.domain.Contact;
 import com.example.contactbook.sevice.ContactBookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,9 +9,6 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller("/")
 public class ContactBookController {
-
-    @Autowired
-    private ContactBookRepo contactRepo;
 
     @Autowired
     private ContactBookService contactBookService;
@@ -34,9 +30,9 @@ public class ContactBookController {
     }
 
     @GetMapping("/findContact")
-    public String findContact(@RequestParam String fullName, Model model) {
+    public String findContactByFullName(@RequestParam String fullName, Model model) {
 
-        contactBookService.findContact(fullName, model);
+        contactBookService.findContactByFullName(fullName, model);
         return "main";
     }
 
@@ -48,15 +44,15 @@ public class ContactBookController {
     }
 
     @PostMapping("/updateContact")
-    public String updateFilm(@ModelAttribute("contact") ContactBook contact, Model model) {
+    public String updateFilm(@ModelAttribute("contact") Contact contact, Model model) {
 
         contactBookService.updateFilm(contact, model);
         return "editContact";
     }
 
     @GetMapping("/delete/{fullName}")
-    public String deleteContact(@PathVariable("fullName") String fullName) {
-        contactRepo.deleteByFullName(fullName);
+    public String deleteContactByFullName(@PathVariable("fullName") String fullName) {
+        contactBookService.deleteContactByFullName(fullName);
         return "redirect:/";
     }
 
