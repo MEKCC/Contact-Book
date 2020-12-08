@@ -8,7 +8,7 @@
     "serve": "webpack-dev-server --mode development --open"
   },
   "dependencies": {
-
+    "angular": "^1.8.2"
   },
   "author": "",
   "license": "ISC",

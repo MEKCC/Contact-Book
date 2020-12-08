@@ -24,7 +24,7 @@ module.exports = {
         new MinifyPlugin({}, {
             comments: false
         }),
-        new HtmlPlugin({template: './../source/index.html'})
+        new HtmlPlugin({template: './newIndex.html'})
     ],
     devServer: {
         publicPath: '/',

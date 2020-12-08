@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Crud example</title>
+</head>
+<body ng-app="application" ng-controller="GreetingController">
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>name</th>
+        <th>age</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="contact in contacts">
+        <td>{{contact.name}}</td>
+        <td>{{contact.age}}</td>
+    </tr>
+    </tbody>
+</table>
+
+<div ng-controller="GreetingController">
+    {{ greeting }}
+</div>
+
+<!--    <table border="1">-->
+<!--        <thead>-->
+<!--        <tr>-->
+<!--            <th>Full name</th>-->
+<!--            <th>First name</th>-->
+<!--            <th>Last name</th>-->
+<!--            <th>Phone number</th>-->
+<!--            <th>Cell phone number</th>-->
+<!--            <th>Address</th>-->
+<!--            <th>Delete</th>-->
+<!--            <th>Update</th>-->
+<!--        </tr>-->
+<!--        </thead>-->
+<!--        <tbody>-->
+<!--        <tr ng-repeat="contact in contacts">-->
+<!--            <td>{{contact.fullName}}</td>-->
+<!--            <td>{{contact.firstName}}</td>-->
+<!--            <td>{{contact.lastName}}</td>-->
+<!--            <td>{{contact.phoneNumber}}</td>-->
+<!--            <td>{{contact.cellPhoneNumber}}</td>-->
+<!--            <td>{{contact.address}}</td>-->
+<!--            <td><a href="/delete/{{contact.fullName}}">Delete</a></td>-->
+<!--            <td><a href="/update/{{contact.fullName}}">Update</a></td>-->
+<!--        </tr>-->
+<!--        </tbody>-->
+<!--    </table>-->
+
+
+</body>
+</html>
