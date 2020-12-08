@@ -6,7 +6,7 @@ module.exports = {
     mode: 'development',
     devtool: 'source-map',
     context: path.resolve(__dirname, 'source'),
-    entry: './main.js',
+    entry: './index.js',
     output: {
         filename: "bundle.js",
         path: path.resolve(__dirname, './../src/main/resources/static/')
@@ -17,14 +17,17 @@ module.exports = {
                 test: /.(js|jsx)$/,
                 exclude: /node_modules/,
                 loader: 'babel-loader'
-            }
+            },
+            {
+                test: /\.(html)$/, loader: "raw-loader"
+            },
         ]
     },
     plugins: [
         new MinifyPlugin({}, {
             comments: false
         }),
-        new HtmlPlugin({template: './newIndex.html'})
+        new HtmlPlugin({template: './index.html'})
     ],
     devServer: {
         publicPath: '/',
