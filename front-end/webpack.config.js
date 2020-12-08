@@ -4,13 +4,12 @@ const HtmlPlugin = require('html-webpack-plugin');
 
 module.exports = {
     mode: 'development',
-    // mode: 'production',
     devtool: 'source-map',
     context: path.resolve(__dirname, 'source'),
     entry: './main.js',
     output: {
-        filename: "index.js",
-        path: path.resolve(__dirname, 'assets')
+        filename: "bundle.js",
+        path: path.resolve(__dirname, './../src/main/resources/static/')
     },
     module: {
         rules: [
@@ -25,6 +24,15 @@ module.exports = {
         new MinifyPlugin({}, {
             comments: false
         }),
-        new HtmlPlugin({template: './../index.html'})
-    ]
+        new HtmlPlugin({template: './../source/index.html'})
+    ],
+    devServer: {
+        publicPath: '/',
+        port: 8081,
+        proxy: {
+            '/contacts': {
+                target: 'http://localhost:8080'
+            }
+        }
+    }
 }
