@@ -21,6 +21,18 @@ module.exports = {
             {
                 test: /\.(html)$/, loader: "raw-loader"
             },
+            {
+                test: /\.js$/,
+                exclude: /node_modules/,
+                use: [{
+                    loader: 'ng-annotate-loader',
+                    options: {
+                        ngAnnotate: 'ng-annotate-patched',
+                        es6: true,
+                        explicitOnly: false
+                    }
+                }],
+            },
         ]
     },
     plugins: [
