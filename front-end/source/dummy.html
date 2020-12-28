@@ -1,3 +1,24 @@
 <button ng-click="ctrl.load()">hello button</button>
 <h1>Simple content</h1>
 <h1>{{ctrl.name}}</h1>
+
+<table border="1">
+    <tr>
+        <th>contact id</th>
+        <th>contact fullName</th>
+        <th>contact firstName</th>
+        <th>contact lastName</th>
+        <th>contact phoneNumber</th>
+        <th>contact cellPhoneNumber</th>
+        <th>contact address</th>
+    </tr>
+    <tr ng-repeat="contact in ctrl.name">
+        <td> {{ contact.id }}</td>
+        <td> {{ contact.fullName }}</td>
+        <td> {{ contact.firstName }}</td>
+        <td> {{ contact.lastName }}</td>
+        <td> {{ contact.phoneNumber }}</td>
+        <td> {{ contact.cellPhoneNumber }}</td>
+        <td> {{ contact.address }}</td>
+    </tr>
+</table>

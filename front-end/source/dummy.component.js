@@ -11,7 +11,8 @@ class DummyController {
 
     load() {
         this.$http.get("/contacts").then((response) => {
-            this.name = JSON.stringify(response.data);
+            // this.name = JSON.stringify(response.data);
+            this.name = response.data;
         });
     }
 }
