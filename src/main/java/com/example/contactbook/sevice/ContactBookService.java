@@ -6,28 +6,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
+import java.util.List;
+
 @Service
 public class ContactBookService {
 
     @Autowired
-    ContactBookRepo contactRepo;
+    private ContactBookRepo contactRepo;
 
-    public Model mainPageWithContacts(Model model) {
-
-        model.addAttribute("contacts", contactRepo.findAll());
-        return model;
+    public List<Contact> getAllContacts() {
+        return contactRepo.findAll();
     }
 
-    public Model createContact(String fullName, String firstName, String lastName,
-                               String phoneNumber, String cellPhoneNumber, String address,
-                               Model model) {
+    public void createContact(String fullName, String firstName, String lastName,
+                              String phoneNumber, String cellPhoneNumber, String address) {
 
-        String message;
-        if (contactRepo.findByFullName(fullName) != null) {
-            message = "user is already exist, please choose another name";
-            model.addAttribute("message", message);
-            return model;
-        }
+//        String message;
+//        if (contactRepo.findByFullName(fullName) != null) {
+//            message = "user is already exist, please choose another name";
+//            model.addAttribute("message", message);
+//            return model;
+//        }
 
         Contact contact = Contact.builder()
                 .fullName(fullName)
@@ -40,10 +39,10 @@ public class ContactBookService {
 
         contactRepo.save(contact);
 
-        Iterable<Contact> contactFromDB = contactRepo.findAll();
-        model.addAttribute("contacts", contactFromDB);
-
-        return model;
+//        Iterable<Contact> contactFromDB = contactRepo.findAll();
+//        model.addAttribute("contacts", contactFromDB);
+//
+//        return model;
     }
 
     public Model findContactByFullName(String fullName, Model model) {

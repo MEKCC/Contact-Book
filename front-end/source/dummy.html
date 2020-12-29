@@ -1,18 +1,18 @@
-<button ng-click="ctrl.load()">hello button</button>
-<h1>Simple content</h1>
-<h1>{{ctrl.name}}</h1>
+<button ng-click="ctrl.getAllContacts()">hello button</button>
 
 <table border="1">
     <tr>
-        <th>contact id</th>
-        <th>contact fullName</th>
-        <th>contact firstName</th>
-        <th>contact lastName</th>
-        <th>contact phoneNumber</th>
-        <th>contact cellPhoneNumber</th>
-        <th>contact address</th>
+        <th>id</th>
+        <th>full name</th>
+        <th>first name</th>
+        <th>last name</th>
+        <th>phone number</th>
+        <th>cell phone number</th>
+        <th>address</th>
+        <th>update</th>
+        <th>delete</th>
     </tr>
-    <tr ng-repeat="contact in ctrl.name">
+    <tr ng-repeat="contact in ctrl.listOfContacts">
         <td> {{ contact.id }}</td>
         <td> {{ contact.fullName }}</td>
         <td> {{ contact.firstName }}</td>
@@ -22,3 +22,38 @@
         <td> {{ contact.address }}</td>
     </tr>
 </table>
+
+
+<form ng-submit="ctrl.addContact()">
+    <table border="0">
+        <tr>
+            <td>Contact full name</td>
+            <td><input type="text" ng-model="ctrl.fullName" /></td>
+        </tr>
+        <tr>
+            <td>Contact first name</td>
+            <td><input type="text" ng-model="ctrl.firstName"  /></td>
+        </tr>
+        <tr>
+            <td>Contact last name</td>
+            <td><input type="text" ng-model="ctrl.lastName"  /></td>
+        </tr>
+        <tr>
+            <td>Contact phone number</td>
+            <td><input type="text" ng-model="ctrl.phoneNumber"  /></td>
+        </tr>
+        <tr>
+            <td>Contact cell phone number</td>
+            <td><input type="text" ng-model="ctrl.cellPhoneNumber"  /></td>
+        </tr>
+        <tr>
+            <td>Contact address</td>
+            <td><input type="text" ng-model="ctrl.address"  /></td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input type="submit" value="Submit" class="blue-button" />
+            </td>
+        </tr>
+    </table>
+</form>
