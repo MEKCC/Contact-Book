@@ -6,13 +6,15 @@ class DummyController {
     /** @ngInject */
     constructor($http) {
         this.$http = $http;
-        this.fullName = "";
-        this.firstName = "";
-        this.lastName = "";
-        this.phoneNumber = "";
-        this.cellPhoneNumber = "";
-        this.address = "";
 
+        this.contact = {
+            fullName: "",
+            firstName: "",
+            lastName: "",
+            proneNumber: "",
+            cellProneNumber: "",
+            address: ""
+        };
     }
 
     getAllContacts() {
@@ -22,14 +24,7 @@ class DummyController {
     }
 
     addContact() {
-        this.$http.post("/contacts/add", {
-            fullName: this.fullName,
-            firstName: this.firstName,
-            lastName: this.lastName,
-            phoneNumber: this.phoneNumber,
-            cellPhoneNumber: this.phoneNumber,
-            address: this.address
-        }).then((response) => {
+        this.$http.post("/contacts/add", this.contact).then((response) => {
         });
     }
 }
