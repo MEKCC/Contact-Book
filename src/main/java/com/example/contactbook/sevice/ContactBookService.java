@@ -3,8 +3,10 @@ package com.example.contactbook.sevice;
 import com.example.contactbook.domain.Contact;
 import com.example.contactbook.repos.ContactBookRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -21,12 +23,11 @@ public class ContactBookService {
     public void createContact(String fullName, String firstName, String lastName,
                               String phoneNumber, String cellPhoneNumber, String address) {
 
-//        String message;
-//        if (contactRepo.findByFullName(fullName) != null) {
-//            message = "user is already exist, please choose another name";
-//            model.addAttribute("message", message);
-//            return model;
-//        }
+        if (contactRepo.findByFullName(fullName) != null) {
+            String message = "user is already exist, please choose another full name";
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND, message);
+        }
 
         Contact contact = Contact.builder()
                 .fullName(fullName)
@@ -38,11 +39,6 @@ public class ContactBookService {
                 .build();
 
         contactRepo.save(contact);
-
-//        Iterable<Contact> contactFromDB = contactRepo.findAll();
-//        model.addAttribute("contacts", contactFromDB);
-//
-//        return model;
     }
 
     public Model findContactByFullName(String fullName, Model model) {

@@ -25,34 +25,35 @@
 
 
 <form ng-submit="ctrl.addContact()">
+    <h1>{{ctrl.errorMessage}}</h1>
     <table border="0">
         <tr>
             <td>Contact full name</td>
-            <td><input type="text" ng-model="ctrl.contact.fullName" /></td>
+            <td><input type="text" ng-model="ctrl.contact.fullName"/></td>
         </tr>
         <tr>
             <td>Contact first name</td>
-            <td><input type="text" ng-model="ctrl.contact.firstName"  /></td>
+            <td><input type="text" ng-model="ctrl.contact.firstName"/></td>
         </tr>
         <tr>
             <td>Contact last name</td>
-            <td><input type="text" ng-model="ctrl.contact.lastName"  /></td>
+            <td><input type="text" ng-model="ctrl.contact.lastName"/></td>
         </tr>
         <tr>
             <td>Contact phone number</td>
-            <td><input type="text" ng-model="ctrl.contact.phoneNumber"  /></td>
+            <td><input type="text" ng-model="ctrl.contact.phoneNumber"/></td>
         </tr>
         <tr>
             <td>Contact cell phone number</td>
-            <td><input type="text" ng-model="ctrl.contact.cellPhoneNumber"  /></td>
+            <td><input type="text" ng-model="ctrl.contact.cellPhoneNumber"/></td>
         </tr>
         <tr>
             <td>Contact address</td>
-            <td><input type="text" ng-model="ctrl.contact.address"  /></td>
+            <td><input type="text" ng-model="ctrl.contact.address"/></td>
         </tr>
         <tr>
             <td colspan="2">
-                <input type="submit" value="Submit" class="blue-button" />
+                <input type="submit" value="Submit" class="blue-button"/>
             </td>
         </tr>
     </table>

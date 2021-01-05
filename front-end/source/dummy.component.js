@@ -24,7 +24,8 @@ class DummyController {
     }
 
     addContact() {
-        this.$http.post("/contacts/add", this.contact).then((response) => {
+        this.$http.post("/contacts/add", this.contact).catch((response) => {
+            this.errorMessage = response.data.message;
         });
     }
 }
