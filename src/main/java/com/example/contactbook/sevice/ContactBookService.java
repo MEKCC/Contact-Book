@@ -41,11 +41,13 @@ public class ContactBookService {
         contactRepo.save(contact);
     }
 
-    public Model findContactByFullName(String fullName, Model model) {
-        Contact contactByFullName = contactRepo.findByFullName(fullName);
-        model.addAttribute("contacts", contactByFullName);
-        return model;
+    public Contact findContactByFullName(String fullName) {
+        return contactRepo.findByFullName(fullName);
     }
+
+
+
+
 
     public Model updateContact(String fullName, Model model) {
         Contact updateContact = contactRepo.findByFullName(fullName);

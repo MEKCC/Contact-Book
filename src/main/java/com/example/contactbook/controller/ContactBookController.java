@@ -24,21 +24,18 @@ public class ContactBookController {
         contactBookService.createContact(contact.getFullName(), contact.getFirstName(), contact.getLastName(), contact.getPhoneNumber(), contact.getCellPhoneNumber(), contact.getAddress());
     }
 
+    @PostMapping("/findContact")
+    public Contact findContactByFullName(@RequestBody Contact contact) {
+        return contactBookService.findContactByFullName(contact.getFullName());
+    }
 
-//    @PostMapping("/add")
-//    public void createContact(@RequestParam String fullName, @RequestParam String firstName, @RequestParam String lastName,
-//                              @RequestParam String phoneNumber, @RequestParam String cellPhoneNumber, @RequestParam String address,
-//                              Model model) {
-//
-//        contactBookService.createContact(fullName, firstName, lastName, phoneNumber, cellPhoneNumber, address, model);
-//    }
-//
 //    @GetMapping("/findContact")
-//    public String findContactByFullName(@RequestParam String fullName, Model model) {
-//
-//        contactBookService.findContactByFullName(fullName, model);
-//        return "main";
+//    public Contact findContactByFullName(@RequestParam String fullName) {
+//        System.out.println(fullName);
+//        return contactBookService.findContactByFullName(fullName);
 //    }
+
+
 //
 //    @GetMapping("/update/{fullName}")
 //    public String updateContact(@PathVariable("fullName") String fullName, Model model) {

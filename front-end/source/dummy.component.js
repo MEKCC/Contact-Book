@@ -23,6 +23,12 @@ class DummyController {
         });
     }
 
+    findContact() {
+        this.$http.post("/contacts/findContact", this.contact).then((response) => {
+            this.oneContact = response.data;
+        });
+    }
+
     addContact() {
         this.$http.post("/contacts/add", this.contact).catch((response) => {
             this.errorMessage = response.data.message;
