@@ -25,7 +25,7 @@ class DummyController {
 
     findContact() {
         this.$http.post("/contacts/findContact", this.contact).then((response) => {
-            this.oneContact = response.data;
+            this.foundContact = response.data;
         });
     }
 

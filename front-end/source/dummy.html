@@ -14,9 +14,32 @@
 </form>
 
 
+<table ng-if="ctrl.foundContact" border="1">
+    <tr>
+        <th>id</th>
+        <th>full name</th>
+        <th>first name</th>
+        <th>last name</th>
+        <th>phone number</th>
+        <th>cell phone number</th>
+        <th>address</th>
+        <th>update</th>
+        <th>delete</th>
+    </tr>
+    <tr>
+        <td> {{ ctrl.foundContact.id }}</td>
+        <td> {{ ctrl.foundContact.fullName }}</td>
+        <td> {{ ctrl.foundContact.firstName }}</td>
+        <td> {{ ctrl.foundContact.lastName }}</td>
+        <td> {{ ctrl.foundContact.phoneNumber }}</td>
+        <td> {{ ctrl.foundContact.cellPhoneNumber }}</td>
+        <td> {{ ctrl.foundContact.address }}</td>
+    </tr>
+</table>
+
+<br>
+
 <button ng-click="ctrl.getAllContacts()">hello button</button>
-
-
 <table border="1">
     <tr>
         <th>id</th>
@@ -39,7 +62,6 @@
         <td> {{ contact.address }}</td>
     </tr>
 </table>
-
 
 <form ng-submit="ctrl.addContact()">
     <h1>{{ctrl.errorMessage}}</h1>
