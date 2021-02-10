@@ -29,12 +29,10 @@ public class ContactBookController {
         return contactBookService.findContactByFullName(contact.getFullName());
     }
 
-//    @GetMapping("/findContact")
-//    public Contact findContactByFullName(@RequestParam String fullName) {
-//        System.out.println(fullName);
-//        return contactBookService.findContactByFullName(fullName);
-//    }
-
+    @PostMapping("/delete/{fullName}")
+    public void deleteContactByFullName(@PathVariable("fullName") String fullName) {
+        contactBookService.deleteContactByFullName(fullName);
+    }
 
 //
 //    @GetMapping("/update/{fullName}")

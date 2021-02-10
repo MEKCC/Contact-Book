@@ -45,6 +45,9 @@ public class ContactBookService {
         return contactRepo.findByFullName(fullName);
     }
 
+    public void deleteContactByFullName(String fullName) {
+        contactRepo.deleteByFullName(fullName);
+    }
 
 
 
@@ -66,9 +69,5 @@ public class ContactBookService {
 
         contactRepo.save(contact);
         return model;
-    }
-
-    public void deleteContactByFullName(String fullName) {
-        contactRepo.deleteByFullName(fullName);
     }
 }

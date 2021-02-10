@@ -34,6 +34,11 @@ class DummyController {
             this.errorMessage = response.data.message;
         });
     }
+
+    deleteContact(contact) {
+        this.$http.post("/contacts/delete/" + contact.fullName).then(() => {
+        });
+    }
 }
 
 
