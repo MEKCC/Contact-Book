@@ -34,13 +34,10 @@ public class ContactBookController {
         contactBookService.deleteContactByFullName(fullName);
     }
 
-//
-//    @GetMapping("/update/{fullName}")
-//    public String updateContact(@PathVariable("fullName") String fullName, Model model) {
-//
-//        contactBookService.updateContact(fullName, model);
-//        return "editContact";
-//    }
+    @PostMapping("/update")
+    public void updateContact(@RequestBody Contact contact) {
+        contactBookService.updateContact(contact);
+    }
 //
 //    @PostMapping("/updateContact")
 //    public String updateFilm(@ModelAttribute("contact") Contact contact, Model model) {
@@ -49,15 +46,4 @@ public class ContactBookController {
 //        return "editContact";
 //    }
 //
-//    @GetMapping("/delete/{fullName}")
-//    public String deleteContactByFullName(@PathVariable("fullName") String fullName) {
-//        contactBookService.deleteContactByFullName(fullName);
-//        return "redirect:/";
-//    }
-
-//    @GetMapping("/delete/{id}")
-//    public String deleteContact(@PathVariable("id") String id) {
-//        contactRepo.deleteById(id);
-//        return "redirect:/";
-//    }
 }

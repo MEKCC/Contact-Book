@@ -5,7 +5,6 @@ import com.example.contactbook.repos.ContactBookRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
@@ -50,24 +49,33 @@ public class ContactBookService {
     }
 
 
+    public void updateContact(Contact contact) {
+        Contact contactFromDB = contactRepo.findById(contact.getId()).get();
 
-
-    public Model updateContact(String fullName, Model model) {
-        Contact updateContact = contactRepo.findByFullName(fullName);
-        model.addAttribute("updateContact", updateContact);
-        return model;
-    }
-
-    public Model updateFilm(Contact contact, Model model) {
-        model.addAttribute("updateContact", contact);
-        String message;
+        System.out.println(contactFromDB.getId());
+        System.out.println(contactFromDB.getFullName());
         if (contactRepo.findByFullName(contact.getFullName()) != null) {
-            message = "this name is already exist, please choose another name!!!";
-            model.addAttribute("message", message);
-            return model;
+            String message = "user is already exist, please choose another full name";
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND, message);
         }
 
         contactRepo.save(contact);
-        return model;
     }
+
+
+
+
+//    public Model updateFilm(Contact contact, Model model) {
+//        model.addAttribute("updateContact", contact);
+//        String message;
+//        if (contactRepo.findByFullName(contact.getFullName()) != null) {
+//            message = "this name is already exist, please choose another name!!!";
+//            model.addAttribute("message", message);
+//            return model;
+//        }
+//
+//        contactRepo.save(contact);
+//        return model;
+//    }
 }

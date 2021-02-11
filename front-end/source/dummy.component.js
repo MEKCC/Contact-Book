@@ -8,6 +8,7 @@ class DummyController {
         this.$http = $http;
 
         this.contact = {
+            id: "",
             fullName: "",
             firstName: "",
             lastName: "",
@@ -29,8 +30,15 @@ class DummyController {
         });
     }
 
+    // addContact() {
+    //     this.$http.post("/contacts/add", this.contact).catch((response) => {
+    //         // `contact/${this.contact.id ? 'add' : 'update'}`
+    //         this.errorMessage = response.data.message;
+    //     });
+    // }
+
     addContact() {
-        this.$http.post("/contacts/add", this.contact).catch((response) => {
+        this.$http.post(`contacts/${this.contact.id ? 'update/' : 'add/'}`, this.contact).catch((response) => {
             this.errorMessage = response.data.message;
         });
     }
@@ -38,6 +46,10 @@ class DummyController {
     deleteContact(contact) {
         this.$http.post("/contacts/delete/" + contact.fullName).then(() => {
         });
+    }
+
+    updateContact(index) {
+        this.contact = this.listOfContacts[index];
     }
 }
 
