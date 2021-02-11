@@ -38,12 +38,4 @@ public class ContactBookController {
     public void updateContact(@RequestBody Contact contact) {
         contactBookService.updateContact(contact);
     }
-//
-//    @PostMapping("/updateContact")
-//    public String updateFilm(@ModelAttribute("contact") Contact contact, Model model) {
-//
-//        contactBookService.updateFilm(contact, model);
-//        return "editContact";
-//    }
-//
 }

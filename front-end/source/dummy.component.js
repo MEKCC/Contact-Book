@@ -2,7 +2,6 @@ import template from "./dummy.html"
 
 class DummyController {
 
-
     /** @ngInject */
     constructor($http) {
         this.$http = $http;
@@ -30,13 +29,6 @@ class DummyController {
         });
     }
 
-    // addContact() {
-    //     this.$http.post("/contacts/add", this.contact).catch((response) => {
-    //         // `contact/${this.contact.id ? 'add' : 'update'}`
-    //         this.errorMessage = response.data.message;
-    //     });
-    // }
-
     addContact() {
         this.$http.post(`contacts/${this.contact.id ? 'update/' : 'add/'}`, this.contact).catch((response) => {
             this.errorMessage = response.data.message;
@@ -52,7 +44,6 @@ class DummyController {
         this.contact = this.listOfContacts[index];
     }
 }
-
 
 const component = {
     controller: DummyController,

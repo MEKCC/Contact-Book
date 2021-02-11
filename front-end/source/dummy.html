@@ -32,6 +32,12 @@
         <td> {{ ctrl.foundContact.phoneNumber }}</td>
         <td> {{ ctrl.foundContact.cellPhoneNumber }}</td>
         <td> {{ ctrl.foundContact.address }}</td>
+        <td>
+            <a ng-click="ctrl.updateContact($index)" class="edit-button">Edit</a>
+        </td>
+        <td>
+            <a ng-click="ctrl.deleteContact(contact)" class="delete-button">Delete</a>
+        </td>
     </tr>
 </table>
 

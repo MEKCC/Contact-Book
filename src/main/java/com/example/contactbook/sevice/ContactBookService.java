@@ -48,12 +48,8 @@ public class ContactBookService {
         contactRepo.deleteByFullName(fullName);
     }
 
-
     public void updateContact(Contact contact) {
-        Contact contactFromDB = contactRepo.findById(contact.getId()).get();
 
-        System.out.println(contactFromDB.getId());
-        System.out.println(contactFromDB.getFullName());
         if (contactRepo.findByFullName(contact.getFullName()) != null) {
             String message = "user is already exist, please choose another full name";
             throw new ResponseStatusException(
@@ -62,20 +58,4 @@ public class ContactBookService {
 
         contactRepo.save(contact);
     }
-
-
-
-
-//    public Model updateFilm(Contact contact, Model model) {
-//        model.addAttribute("updateContact", contact);
-//        String message;
-//        if (contactRepo.findByFullName(contact.getFullName()) != null) {
-//            message = "this name is already exist, please choose another name!!!";
-//            model.addAttribute("message", message);
-//            return model;
-//        }
-//
-//        contactRepo.save(contact);
-//        return model;
-//    }
 }
