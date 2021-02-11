@@ -15,6 +15,8 @@ class DummyController {
             cellProneNumber: "",
             address: ""
         };
+
+        this.searchByParameter = "";
     }
 
     getAllContacts() {
@@ -23,8 +25,8 @@ class DummyController {
         });
     }
 
-    findContact() {
-        this.$http.post("/contacts/findContact", this.contact).then((response) => {
+    findContact(searchByParameter) {
+        this.$http.get("/contacts/findContact/" + searchByParameter).then((response) => {
             this.foundContact = response.data;
         });
     }

@@ -1,8 +1,8 @@
-<form ng-submit="ctrl.findContact()">
+<form ng-submit="ctrl.findContact(ctrl.searchByParameter)">
     <table border="0">
         <tr>
-            <td>Contact full name</td>
-            <td><input type="text" required ng-model="ctrl.contact.fullName"/></td>
+            <td>Search by name or surname</td>
+            <td><input type="text" required ng-model="ctrl.searchByParameter"/></td>
         </tr>
         <tr>
             <td colspan="2">
@@ -24,14 +24,14 @@
         <th>update</th>
         <th>delete</th>
     </tr>
-    <tr>
-        <td> {{ ctrl.foundContact.id }}</td>
-        <td> {{ ctrl.foundContact.fullName }}</td>
-        <td> {{ ctrl.foundContact.firstName }}</td>
-        <td> {{ ctrl.foundContact.lastName }}</td>
-        <td> {{ ctrl.foundContact.phoneNumber }}</td>
-        <td> {{ ctrl.foundContact.cellPhoneNumber }}</td>
-        <td> {{ ctrl.foundContact.address }}</td>
+    <tr ng-repeat="contact in ctrl.foundContact">
+        <td> {{ contact.id }}</td>
+        <td> {{ contact.fullName }}</td>
+        <td> {{ contact.firstName }}</td>
+        <td> {{ contact.lastName }}</td>
+        <td> {{ contact.phoneNumber }}</td>
+        <td> {{ contact.cellPhoneNumber }}</td>
+        <td> {{ contact.address }}</td>
         <td>
             <a ng-click="ctrl.updateContact($index)" class="edit-button">Edit</a>
         </td>

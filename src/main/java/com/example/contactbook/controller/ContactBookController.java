@@ -24,9 +24,9 @@ public class ContactBookController {
         contactBookService.createContact(contact.getFullName(), contact.getFirstName(), contact.getLastName(), contact.getPhoneNumber(), contact.getCellPhoneNumber(), contact.getAddress());
     }
 
-    @PostMapping("/findContact")
-    public Contact findContactByFullName(@RequestBody Contact contact) {
-        return contactBookService.findContactByFullName(contact.getFullName());
+    @GetMapping("/findContact/{searchParameter}")
+    public List<Contact> findContactByFirstNameOrLastName(@PathVariable("searchParameter") String searchParameter) {
+        return contactBookService.findContactsByNameOrSurname(searchParameter);
     }
 
     @PostMapping("/delete/{fullName}")
