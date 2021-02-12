@@ -12,7 +12,8 @@
     </table>
 </form>
 
-<table ng-if="ctrl.foundContact" border="1">
+<div class="table-responsive">
+<table class="table table-bordered table-hover" ng-if="ctrl.foundContact">
     <tr>
         <th>id</th>
         <th>full name</th>
@@ -40,6 +41,7 @@
         </td>
     </tr>
 </table>
+</div>
 
 <br>
 

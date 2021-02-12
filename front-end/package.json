@@ -8,21 +8,32 @@
     "serve": "webpack-dev-server --mode development --open"
   },
   "dependencies": {
-    "angular": "^1.8.2"
+    "angular": "^1.8.2",
+    "autoprefixer": "^10.2.4",
+    "bootstrap": "^4.6.0",
+    "css-loader": "^2.1.1",
+    "jquery": "^3.5.1",
+    "popper.js": "^1.16.1",
+    "precss": "^4.0.0",
+    "style-loader": "^2.0.0"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "ng-annotate-loader": "^0.7.0",
-    "ng-annotate-patched": "^1.13.0",
     "@babel/core": "^7.12.9",
     "@babel/preset-env": "^7.12.7",
     "babel-loader": "^8.2.2",
     "babel-minify-webpack-plugin": "^0.3.1",
     "html-webpack-plugin": "^3.2.0",
+    "ng-annotate-loader": "^0.7.0",
+    "ng-annotate-patched": "^1.13.0",
+    "node-sass": "^5.0.0",
+    "postcss": "^8.2.6",
+    "postcss-loader": "^4.2.0",
+    "raw-loader": "0.5.1",
+    "sass-loader": "^10.1.1",
     "webpack": "^4.41.5",
     "webpack-cli": "^3.3.10",
-    "webpack-dev-server": "^3.10.1",
-    "raw-loader": "0.5.1"
+    "webpack-dev-server": "^3.10.1"
   }
 }
