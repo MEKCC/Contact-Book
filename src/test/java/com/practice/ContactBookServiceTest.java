@@ -12,6 +12,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -39,7 +40,7 @@ public class ContactBookServiceTest {
     private ContactBookService contactBookService;
 
     @Test
-    void getAllContactsTestCorrectData() {
+    void createContactTestCorrectData() {
         String fullName = "Maksym";
         String firstName = "Max";
         String lastName = "Petrychuk";
@@ -56,19 +57,38 @@ public class ContactBookServiceTest {
                 .address(address)
                 .build();
 
+        when(contactBookRepo.findByFullName(fullName)).thenReturn(null);
         contactBookService.createContact(fullName, firstName, lastName, phoneNumber, cellPhoneNumber, address);
         verify(contactBookRepo, times(1)).save(contact);
-
     }
 
     @Test
-    void getAllContactsTestWrongData() throws Exception {
+    void createContactTestWrongData() throws Exception {
         when(contactBookRepo.findByFullName(anyString())).thenReturn(contact);
 
         this.mockMvc.perform(get("/add"))
                 .andExpect(status().is4xxClientError());
 
         verify(contactBookRepo, times(0)).save(contact);
+    }
+
+    @Test
+    void findContactsByNameOrSurnameTest() {
+        String searchParameter = "a";
+        contactBookService.findContactsByNameOrSurname(searchParameter);
+        when(contactBookRepo.findByFirstNameContainingIgnoreCaseOrLastNameContainingIgnoreCase(anyString(), anyString())).thenReturn(contacts);
+        verify(contactBookRepo, times(1)).findByFirstNameContainingIgnoreCaseOrLastNameContainingIgnoreCase(anyString(), anyString());
+    }
+
+    @Test
+    void deleteContactByFullNameTest() {
+        String fullName = "Maksym";
+        contactBookService.deleteContactByFullName(fullName);
+        verify(contactBookRepo, times(1)).deleteByFullName(anyString());
+    }
+
+    @Test
+    void updateContactTest() {
 
     }
 }
