@@ -12,10 +12,9 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.List;
-import java.util.Optional;
 
 import static org.mockito.Mockito.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static util.InitContactData.getContactList;
 import static util.InitContactData.getOneContact;
@@ -27,8 +26,16 @@ import static util.InitContactData.getOneContact;
 })
 public class ContactBookServiceTest {
 
-    private static List<Contact> contacts = getContactList();
-    private static Contact contact = getOneContact();
+    private static final List<Contact> contacts = getContactList();
+    private static final Contact contact = getOneContact();
+
+    private static final String FULL_NAME = getOneContact().getFullName();
+    private static final String FIRST_NAME = getOneContact().getFirstName();
+    private static final String LAST_NAME = getOneContact().getLastName();
+    private static final String PHONE_NUMBER = getOneContact().getPhoneNumber();
+    private static final String CELL_PHONE_NUMBER = getOneContact().getCellPhoneNumber();
+    private static final String ADDRESS = getOneContact().getAddress();
+    private static final String SEARCH_PARAMETER = "random parameter";
 
     @MockBean
     private ContactBookRepo contactBookRepo;
@@ -41,24 +48,8 @@ public class ContactBookServiceTest {
 
     @Test
     void createContactTestCorrectData() {
-        String fullName = "Maksym";
-        String firstName = "Max";
-        String lastName = "Petrychuk";
-        String phoneNumber = "123";
-        String cellPhoneNumber = "456";
-        String address = "random street";
-
-        Contact contact = Contact.builder()
-                .fullName(fullName)
-                .firstName(firstName)
-                .lastName(lastName)
-                .phoneNumber(phoneNumber)
-                .cellPhoneNumber(cellPhoneNumber)
-                .address(address)
-                .build();
-
-        when(contactBookRepo.findByFullName(fullName)).thenReturn(null);
-        contactBookService.createContact(fullName, firstName, lastName, phoneNumber, cellPhoneNumber, address);
+        when(contactBookRepo.findByFullName(anyString())).thenReturn(null);
+        contactBookService.createContact(FULL_NAME, FIRST_NAME, LAST_NAME, PHONE_NUMBER, CELL_PHONE_NUMBER, ADDRESS);
         verify(contactBookRepo, times(1)).save(contact);
     }
 
@@ -66,7 +57,7 @@ public class ContactBookServiceTest {
     void createContactTestWrongData() throws Exception {
         when(contactBookRepo.findByFullName(anyString())).thenReturn(contact);
 
-        this.mockMvc.perform(get("/add"))
+        this.mockMvc.perform(post("contacts/add"))
                 .andExpect(status().is4xxClientError());
 
         verify(contactBookRepo, times(0)).save(contact);
@@ -74,21 +65,21 @@ public class ContactBookServiceTest {
 
     @Test
     void findContactsByNameOrSurnameTest() {
-        String searchParameter = "a";
-        contactBookService.findContactsByNameOrSurname(searchParameter);
+        contactBookService.findContactsByNameOrSurname(SEARCH_PARAMETER);
         when(contactBookRepo.findByFirstNameContainingIgnoreCaseOrLastNameContainingIgnoreCase(anyString(), anyString())).thenReturn(contacts);
         verify(contactBookRepo, times(1)).findByFirstNameContainingIgnoreCaseOrLastNameContainingIgnoreCase(anyString(), anyString());
     }
 
     @Test
     void deleteContactByFullNameTest() {
-        String fullName = "Maksym";
-        contactBookService.deleteContactByFullName(fullName);
+        contactBookService.deleteContactByFullName(FULL_NAME);
         verify(contactBookRepo, times(1)).deleteByFullName(anyString());
     }
 
     @Test
     void updateContactTest() {
-
+        when(contactBookRepo.findByFullName(anyString())).thenReturn(null);
+        contactBookService.updateContact(contact);
+        verify(contactBookRepo, times(1)).save(contact);
     }
 }

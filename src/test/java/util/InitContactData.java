@@ -9,12 +9,22 @@ public class InitContactData {
 
     public static List<Contact> getContactList() {
         List<Contact> contacts = new ArrayList<>();
-        contacts.add(new Contact("911", "Maksym", "Max", "Petrychuk", "123", "456", "random street"));
+        Contact contact = Contact.builder()
+                .fullName("random")
+                .build();
+        contacts.add(contact);
 
         return contacts;
     }
 
     public static Contact getOneContact() {
-        return new Contact("911", "Maksym", "Max", "Petrychuk", "123", "456", "random street");
+        return Contact.builder()
+                .fullName("Maksym")
+                .firstName("Max")
+                .lastName("Petrychuk")
+                .phoneNumber("123")
+                .cellPhoneNumber("456")
+                .address("random street")
+                .build();
     }
 }

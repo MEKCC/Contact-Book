@@ -53,8 +53,6 @@ public class ContactBookService {
         if (contactRepo.findByFullName(contact.getFullName()) != null && !contact.getId().equals(contactRepo.findByFullName(contact.getFullName()).getId())) {
             String message = "user is already exist, please choose another full name";
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, message);
-        } else if (contactRepo.findByFullName(contact.getFullName()) != null && contact.getId().equals(contactRepo.findByFullName(contact.getFullName()).getId())) {
-            contactRepo.save(contact);
         }
 
         contactRepo.save(contact);
