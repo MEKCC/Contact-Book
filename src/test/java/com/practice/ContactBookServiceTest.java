@@ -26,8 +26,8 @@ import static util.InitContactData.getOneContact;
 })
 public class ContactBookServiceTest {
 
-    private static final List<Contact> contacts = getContactList();
-    private static final Contact contact = getOneContact();
+    private static final List<Contact> CONTACT_LIST = getContactList();
+    private static final Contact CONTACT = getOneContact();
 
     private static final String FULL_NAME = getOneContact().getFullName();
     private static final String FIRST_NAME = getOneContact().getFirstName();
@@ -50,23 +50,23 @@ public class ContactBookServiceTest {
     void createContactTestCorrectData() {
         when(contactBookRepo.findByFullName(anyString())).thenReturn(null);
         contactBookService.createContact(FULL_NAME, FIRST_NAME, LAST_NAME, PHONE_NUMBER, CELL_PHONE_NUMBER, ADDRESS);
-        verify(contactBookRepo, times(1)).save(contact);
+        verify(contactBookRepo, times(1)).save(CONTACT);
     }
 
     @Test
     void createContactTestWrongData() throws Exception {
-        when(contactBookRepo.findByFullName(anyString())).thenReturn(contact);
+        when(contactBookRepo.findByFullName(anyString())).thenReturn(CONTACT);
 
         this.mockMvc.perform(post("contacts/add"))
                 .andExpect(status().is4xxClientError());
 
-        verify(contactBookRepo, times(0)).save(contact);
+        verify(contactBookRepo, times(0)).save(CONTACT);
     }
 
     @Test
     void findContactsByNameOrSurnameTest() {
         contactBookService.findContactsByNameOrSurname(SEARCH_PARAMETER);
-        when(contactBookRepo.findByFirstNameContainingIgnoreCaseOrLastNameContainingIgnoreCase(anyString(), anyString())).thenReturn(contacts);
+        when(contactBookRepo.findByFirstNameContainingIgnoreCaseOrLastNameContainingIgnoreCase(anyString(), anyString())).thenReturn(CONTACT_LIST);
         verify(contactBookRepo, times(1)).findByFirstNameContainingIgnoreCaseOrLastNameContainingIgnoreCase(anyString(), anyString());
     }
 
@@ -79,7 +79,7 @@ public class ContactBookServiceTest {
     @Test
     void updateContactTest() {
         when(contactBookRepo.findByFullName(anyString())).thenReturn(null);
-        contactBookService.updateContact(contact);
-        verify(contactBookRepo, times(1)).save(contact);
+        contactBookService.updateContact(CONTACT);
+        verify(contactBookRepo, times(1)).save(CONTACT);
     }
 }
