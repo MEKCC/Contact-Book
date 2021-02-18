@@ -16,8 +16,6 @@ public class Contact {
     private String id;
 
     private String fullName;
-    private String firstName;
-    private String lastName;
     private String phoneNumber;
     private String cellPhoneNumber;
     private String address;

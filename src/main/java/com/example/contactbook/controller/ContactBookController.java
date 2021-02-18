@@ -15,18 +15,18 @@ public class ContactBookController {
     private ContactBookService contactBookService;
 
     @GetMapping
-    public List<Contact> allContacts() {
+    public List<Contact> getAllContacts() {
         return contactBookService.getAllContacts();
     }
 
     @PostMapping("/add")
     public void createContact(@RequestBody Contact contact) {
-        contactBookService.createContact(contact.getFullName(), contact.getFirstName(), contact.getLastName(), contact.getPhoneNumber(), contact.getCellPhoneNumber(), contact.getAddress());
+        contactBookService.createContact(contact.getFullName(), contact.getPhoneNumber(), contact.getCellPhoneNumber(), contact.getAddress());
     }
 
     @GetMapping("/findContact/{searchParameter}")
-    public List<Contact> findContactByFirstNameOrLastName(@PathVariable("searchParameter") String searchParameter) {
-        return contactBookService.findContactsByNameOrSurname(searchParameter);
+    public List<Contact> findByFullName(@PathVariable("searchParameter") String searchParameter) {
+        return contactBookService.findByFullName(searchParameter);
     }
 
     @PostMapping("/delete/{fullName}")

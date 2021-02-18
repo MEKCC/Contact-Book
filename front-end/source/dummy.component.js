@@ -7,10 +7,7 @@ class DummyController {
         this.$http = $http;
 
         this.contact = {
-            id: "",
             fullName: "",
-            firstName: "",
-            lastName: "",
             proneNumber: "",
             cellProneNumber: "",
             address: ""

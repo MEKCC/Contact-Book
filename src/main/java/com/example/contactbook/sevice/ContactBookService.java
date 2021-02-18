@@ -19,8 +19,7 @@ public class ContactBookService {
         return contactRepo.findAll();
     }
 
-    public void createContact(String fullName, String firstName, String lastName,
-                              String phoneNumber, String cellPhoneNumber, String address) {
+    public void createContact(String fullName, String phoneNumber, String cellPhoneNumber, String address) {
 
         if (contactRepo.findByFullName(fullName) != null) {
             String message = "user is already exist, please choose another full name";
@@ -30,8 +29,6 @@ public class ContactBookService {
 
         Contact contact = Contact.builder()
                 .fullName(fullName)
-                .firstName(firstName)
-                .lastName(lastName)
                 .phoneNumber(phoneNumber)
                 .cellPhoneNumber(cellPhoneNumber)
                 .address(address)
@@ -40,8 +37,8 @@ public class ContactBookService {
         contactRepo.save(contact);
     }
 
-    public List<Contact> findContactsByNameOrSurname(String searchParameter) {
-        return contactRepo.findByFirstNameContainingIgnoreCaseOrLastNameContainingIgnoreCase(searchParameter, searchParameter);
+    public List<Contact> findByFullName(String searchParameter) {
+        return contactRepo.findByFullNameContainingIgnoreCase(searchParameter);
     }
 
     public void deleteContactByFullName(String fullName) {
@@ -49,13 +46,11 @@ public class ContactBookService {
     }
 
     public void updateContact(Contact contact) {
-
         if (contactRepo.findByFullName(contact.getFullName()) != null && !contact.getId().equals(contactRepo.findByFullName(contact.getFullName()).getId())) {
             String message = "user is already exist, please choose another full name";
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, message);
         }
 
         contactRepo.save(contact);
-
     }
 }

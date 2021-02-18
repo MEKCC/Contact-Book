@@ -9,10 +9,7 @@
 <div class="table-responsive">
     <table class="table table-bordered table-hover" ng-if="ctrl.foundContact">
         <tr>
-            <th>Id</th>
             <th>Full name</th>
-            <th>First name</th>
-            <th>Last name</th>
             <th>Phone number</th>
             <th>Cell phone number</th>
             <th>Address</th>
@@ -20,10 +17,7 @@
             <th>Delete</th>
         </tr>
         <tr ng-repeat="contact in ctrl.foundContact">
-            <td> {{ contact.id }}</td>
             <td> {{ contact.fullName }}</td>
-            <td> {{ contact.firstName }}</td>
-            <td> {{ contact.lastName }}</td>
             <td> {{ contact.phoneNumber }}</td>
             <td> {{ contact.cellPhoneNumber }}</td>
             <td> {{ contact.address }}</td>
@@ -43,10 +37,7 @@
 <div class="table-responsive">
     <table class="table table-bordered table-hover" ng-if="ctrl.listOfContacts" border="1">
         <tr>
-            <th>Id</th>
             <th>Full name</th>
-            <th>First name</th>
-            <th>Last name</th>
             <th>Phone number</th>
             <th>Cell phone number</th>
             <th>Address</th>
@@ -54,10 +45,7 @@
             <th>Delete</th>
         </tr>
         <tr ng-repeat="contact in ctrl.listOfContacts">
-            <td> {{ contact.id }}</td>
             <td> {{ contact.fullName }}</td>
-            <td> {{ contact.firstName }}</td>
-            <td> {{ contact.lastName }}</td>
             <td> {{ contact.phoneNumber }}</td>
             <td> {{ contact.cellPhoneNumber }}</td>
             <td> {{ contact.address }}</td>
@@ -79,18 +67,6 @@
         <label for="inputFullName">Full name</label>
         <input type="text" required class="form-control" id="inputFullName" placeholder="full name"
                ng-model="ctrl.contact.fullName">
-    </div>
-    <div class="form-row">
-        <div class="form-group col-md-6">
-            <label for="inputFirstName">First name</label>
-            <input type="text" class="form-control" id="inputFirstName" placeholder="first name"
-                   ng-model="ctrl.contact.firstName">
-        </div>
-        <div class="form-group col-md-6">
-            <label for="inputLastName">Last name</label>
-            <input type="text" class="form-control" id="inputLastName" placeholder="last name"
-                   ng-model="ctrl.contact.lastName">
-        </div>
     </div>
     <div class="form-row">
         <div class="form-group col-md-6">

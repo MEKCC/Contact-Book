@@ -30,8 +30,6 @@ public class ContactBookServiceTest {
     private static final Contact CONTACT = getOneContact();
 
     private static final String FULL_NAME = getOneContact().getFullName();
-    private static final String FIRST_NAME = getOneContact().getFirstName();
-    private static final String LAST_NAME = getOneContact().getLastName();
     private static final String PHONE_NUMBER = getOneContact().getPhoneNumber();
     private static final String CELL_PHONE_NUMBER = getOneContact().getCellPhoneNumber();
     private static final String ADDRESS = getOneContact().getAddress();
@@ -49,7 +47,7 @@ public class ContactBookServiceTest {
     @Test
     void createContactTestCorrectData() {
         when(contactBookRepo.findByFullName(anyString())).thenReturn(null);
-        contactBookService.createContact(FULL_NAME, FIRST_NAME, LAST_NAME, PHONE_NUMBER, CELL_PHONE_NUMBER, ADDRESS);
+        contactBookService.createContact(FULL_NAME, PHONE_NUMBER, CELL_PHONE_NUMBER, ADDRESS);
         verify(contactBookRepo, times(1)).save(CONTACT);
     }
 
@@ -65,9 +63,9 @@ public class ContactBookServiceTest {
 
     @Test
     void findContactsByNameOrSurnameTest() {
-        contactBookService.findContactsByNameOrSurname(SEARCH_PARAMETER);
-        when(contactBookRepo.findByFirstNameContainingIgnoreCaseOrLastNameContainingIgnoreCase(anyString(), anyString())).thenReturn(CONTACT_LIST);
-        verify(contactBookRepo, times(1)).findByFirstNameContainingIgnoreCaseOrLastNameContainingIgnoreCase(anyString(), anyString());
+        contactBookService.findByFullName(SEARCH_PARAMETER);
+        when(contactBookRepo.findByFullNameContainingIgnoreCase(anyString())).thenReturn(CONTACT_LIST);
+        verify(contactBookRepo, times(1)).findByFullNameContainingIgnoreCase(anyString());
     }
 
     @Test

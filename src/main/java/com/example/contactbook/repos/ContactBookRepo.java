@@ -11,7 +11,7 @@ public interface ContactBookRepo extends MongoRepository<Contact, String> {
 
     Contact findByFullName(String fullName);
 
-    List<Contact> findByFirstNameContainingIgnoreCaseOrLastNameContainingIgnoreCase(String firstSearchParameter, String secondSearchParameter);
+    List<Contact> findByFullNameContainingIgnoreCase(String fullName);
 
     void deleteByFullName(String fullName);
 }
